@@ -1,3 +1,16 @@
+var playerSpeedX = 100;
+var playerSpeedY = 80;
+
+var getRandomY = function(){
+    var lanes = [215, 135, 55];
+    return lanes[parseInt((Math.random() * 100) % 3)];
+};
+
+var getRandomX = function(){
+    return Math.random() * -100;
+};
+
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -6,6 +19,8 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = getRandomX();
+    this.y = getRandomY();
 };
 
 // Update the enemy's position, required method for game
@@ -14,6 +29,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if(this.x > 600){
+        this.x = getRandomX();
+        this.y = getRandomY();
+    }else{
+        this.x += 100 * dt;
+    }
+    //console.log('enemy x: ' + this.x + ', enemy y : ' + this.y);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -27,10 +49,10 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.sprite = 'images/char-boy.png'
     this.x = 100;
-    this.y = 100;
+    this.y = 375;
 };
 
-Player.prototype.update = function(){
+Player.prototype.update = function(dt){
 
 };
 Player.prototype.render = function(){
@@ -38,19 +60,26 @@ Player.prototype.render = function(){
 };
 Player.prototype.handleInput = function(key){
     if(key === undefined)return;
-    console.log(key);
     switch(key){
         case "left":
-            this.x = this.x - 100;
+            if(this.x !== 0){
+                this.x = this.x - playerSpeedX;
+            }
         break;
         case "right":
-            this.x = this.x + 100;
+            if(this.x !== 400){
+                this.x = this.x + playerSpeedX;
+            }
         break;
         case "up":
-            this.y = this.y - 100;
+            if(this.y !== -25){
+                this.y = this.y - playerSpeedY;
+            }
         break;
         case "down":
-            this.y = this.y + 100;
+            if(this.y !== 375){
+                this.y = this.y + playerSpeedY;
+            }
         break;
     }
 
@@ -77,3 +106,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
