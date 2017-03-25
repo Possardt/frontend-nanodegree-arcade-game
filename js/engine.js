@@ -23,11 +23,14 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
+        div = doc.createElement('div'),
         lastTime;
+
 
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+    doc.body.appendChild(div);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -69,6 +72,24 @@ var Engine = (function(global) {
         main();
     }
 
+    function checkCollisions(){
+        allEnemies.forEach(function(enemy){
+            if(Math.abs(enemy.x - player.x) < 75 && (enemy.y === player.y)){
+                reset();
+            }
+        });
+    };
+
+    function checkWin() {
+        if(player.y === -25){
+            reset();
+            div.innerText = 'Congrats!!!1! You win!1!';
+        }
+        if(player.y !== 375){
+            div.innerText = '';
+        }
+    };
+
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
      * you implement your collision detection (when two entities occupy the
@@ -80,7 +101,8 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+        checkWin();
     }
 
     /* This is called by the update function and loops through all of the
@@ -159,7 +181,11 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        player.x = 100;
+        player.y = 375;
+        allEnemies.forEach(function(enemy){
+            enemy.x = getRandomX();
+        });
     }
 
     /* Go ahead and load all of the images we know we're going to need to

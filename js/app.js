@@ -7,7 +7,11 @@ var getRandomY = function(){
 };
 
 var getRandomX = function(){
-    return Math.random() * -100;
+    return (Math.random() * -100) - 80;
+};
+
+var getRandomSpeed = function() {
+    return parseInt(Math.random() * 300) + 50;
 };
 
 
@@ -21,6 +25,7 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     this.x = getRandomX();
     this.y = getRandomY();
+    this.speed = getRandomSpeed();
 };
 
 // Update the enemy's position, required method for game
@@ -33,9 +38,8 @@ Enemy.prototype.update = function(dt) {
         this.x = getRandomX();
         this.y = getRandomY();
     }else{
-        this.x += 100 * dt;
+        this.x += this.speed * dt;
     }
-    //console.log('enemy x: ' + this.x + ', enemy y : ' + this.y);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -55,6 +59,7 @@ var Player = function() {
 Player.prototype.update = function(dt){
 
 };
+
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -90,7 +95,11 @@ Player.prototype.handleInput = function(key){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var enemy1 = new Enemy();
-var allEnemies = [enemy1];
+var enemy2 = new Enemy();
+var enemy3 = new Enemy();
+var enemy4 = new Enemy();
+var enemy5 = new Enemy();
+var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 var player = new Player();
 
 
