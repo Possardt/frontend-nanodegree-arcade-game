@@ -6,11 +6,11 @@ Students should use this [rubric](https://review.udacity.com/#!/projects/2696458
 For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
 
 
-#How to Run:
+#How to Run:#
 1. Pull code from this Github repository.
 2. Run index.html in web browser.
 
-#How to play:
+#How to play:#
 1. Use the keypade to move player up, down, left, and right.
 2. Get player to the water without colliding with any bugs.
     * If you do, there is a reward!
