@@ -13,4 +13,4 @@ For detailed instructions on how to get started, check out this [guide](https://
 #How to play:
 1. Use the keypade to move player up, down, left, and right.
 2. Get player to the water without colliding with any bugs.
-*- If you do, there is a reward!
+    * If you do, there is a reward!
